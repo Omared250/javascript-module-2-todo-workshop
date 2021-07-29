@@ -1,17 +1,15 @@
-let todos = [];
+const generateTodoDOM = (todo) => {
+    const todoEl = document.createElement('label')
+    const containerEl = document.createElement('div')
+    const todoText = document.createElement('span')
 
-const createTodo = (text) => {
-    todos.push(text)
+
+    todoText.textContent = todo
+    containerEl.appendChild(todoText)
+
+    todoEl.classList.add('list-item')
+    containerEl.classList.add('list-item_container')
+    todoEl.appendChild(containerEl)
+
+    return todoEl
 }
-
-const el = document.querySelector('#new-todo').addEventListener('submit', (e) => {
-    e.preventDefault()
-    const text = e.target.elements.text.value.trim()
-
-    if (text.length > 0) {
-        createTodo(text)
-        e.target.elements.text.value = ''
-    }
-
-    console.log(todos);
-})
