@@ -1,2 +1,2 @@
 const el = document.querySelector(".button");
-console.log(el);
+el.style.backgroundColor = "green"
