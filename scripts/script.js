@@ -9,7 +9,7 @@ el.addEventListener('submit', (event) => {
         event.target.elements.text.value = ''
     }
 
-    console.log(todos);
+    renderTodos(todos);
 })
 
 const todos = [];
