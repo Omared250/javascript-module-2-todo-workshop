@@ -38,7 +38,16 @@ const renderTodos = (todos) => {
     const todoList = document.querySelector('#todos')
     todoList.innerHTML = ''
 
-    todos.forEach((todo) => {
-        todoList.appendChild(generateTodoDOM(todo))        
-    })
+    if(todos.length > 0) {
+        todos.forEach((todo) => {
+            todoList.appendChild(generateTodoDOM(todo))        
+        })
+    } else {
+        const messageEl = document.createElement('p')
+        messageEl.classList.add('empty-message')
+        messageEl.textContent = "There are no todos to show"
+        todoList.appendChild(messageEl)
+    }
 }
+
+renderTodos(todos);
