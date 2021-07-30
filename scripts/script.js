@@ -23,13 +23,22 @@ const generateTodoDOM = (todo) => {
     const containerEl = document.createElement('div')
     const todoText = document.createElement('span')
 
-
     todoText.textContent = todo
     containerEl.appendChild(todoText)
 
     todoEl.classList.add('list-item')
     containerEl.classList.add('list-item__container')
     todoEl.appendChild(containerEl)
+
+    // setup remove button
+    const  removeButton = document.createElement('button')
+    removeButton.textContent = 'remove'
+    removeButton.classList.add('button', 'button--text')
+    todoEl.appendChild(removeButton)
+    removeButton.addEventListener('click', () => {
+        removeTodo(todoText)
+        renderTodos(todos)
+    })
 
     return todoEl
 }
