@@ -51,3 +51,12 @@ const renderTodos = (todos) => {
 }
 
 renderTodos(todos);
+
+const removeTodo = (todoEl) => {
+    const todoIndex = todos.findIndex((todo) => {
+        return todo.toLowerCase() === todoEl.textContent.toLowerCase()
+    })
+    if(todoIndex > -1) {
+        todos.splice(todoIndex, 1)
+    }
+}
