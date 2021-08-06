@@ -15,15 +15,27 @@ el.addEventListener('submit', (event) => {
 const todos = [];
 
 const createTodo = (text) => {
-    todos.push(text)
+    todos.push({
+        title: text,
+        completed: false
+    })
 }
 
-const generateTodoDOM = (todo) => {
+const generateTodoDOM = (todoObj) => {
     const todoEl = document.createElement('label')
     const containerEl = document.createElement('div')
     const todoText = document.createElement('span')
 
-    todoText.textContent = todo
+    const checkboxEl = document.createElement('input')
+    checkboxEl.setAttribute('type', 'checkbox')
+    checkboxEl.checked = todoObj.completed
+    containerEl.appendChild(checkboxEl)
+    containerEl.addEventListener('change', () => {
+        toggleTodo(todoObj.title)
+        renderTodos(todos)
+    })
+
+    todoText.textContent = todoObj.title
     containerEl.appendChild(todoText)
 
     todoEl.classList.add('list-item')
@@ -36,7 +48,7 @@ const generateTodoDOM = (todo) => {
     removeButton.classList.add('button', 'button--text')
     todoEl.appendChild(removeButton)
     removeButton.addEventListener('click', () => {
-        removeTodo(todoText)
+        removeTodo(todoObj.title)
         renderTodos(todos)
     })
 
@@ -61,11 +73,19 @@ const renderTodos = (todos) => {
 
 renderTodos(todos);
 
-const removeTodo = (todoEl) => {
+const toggleTodo = (title) => {
+    const todo = todos.find((todo) => todo.title.toLowerCase() === title.toLowerCase())
+    if(todo) {
+        todo.completed = !todo.completed
+    }
+}
+
+const removeTodo = (title) => {
     const todoIndex = todos.findIndex((todo) => {
-        return todo.toLowerCase() === todoEl.textContent.toLowerCase()
+        return todo.title.toLowerCase() === title.toLowerCase()
     })
     if(todoIndex > -1) {
         todos.splice(todoIndex, 1)
     }
 }
+
