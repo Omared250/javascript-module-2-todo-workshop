@@ -14,6 +14,12 @@ el.addEventListener('submit', (event) => {
 
 const todos = [];
 
+const filters = {
+    searchTitle: '',
+    showFinished: false,
+    showUnfinished: false
+}
+
 const createTodo = (text) => {
     todos.push({
         title: text,
@@ -77,6 +83,18 @@ const toggleTodo = (title) => {
     const todo = todos.find((todo) => todo.title.toLowerCase() === title.toLowerCase())
     if(todo) {
         todo.completed = !todo.completed
+    }
+}
+
+const setFilters = (updates) => {
+    if(typeof updates.searchTitle === 'string') {
+        filters.searchTitle = updates.searchTitle
+    }
+    if(typeof updates.showFinished === 'boolean') {
+        filters.showFinished = updates.showFinished
+    }
+    if(typeof updates.showUnfinished === 'boolean') {
+        filters.showUnfinished = updates.showUnfinished
     }
 }
 
