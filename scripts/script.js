@@ -8,8 +8,31 @@ el.addEventListener('submit', (event) => {
         createTodo(text)
         event.target.elements.text.value = ''
     }
-
     renderTodos(todos);
+})
+
+const filterInput = document.querySelector('#search-text')
+filterInput.addEventListener('input', (event) => {
+    setFilters({
+        searchTitle: event.target.value
+    })
+    renderTodos(todos);
+})
+
+const checkFinished = document.querySelector('#show-finished')
+checkFinished.addEventListener('change', (event) => {
+    setFilters({
+        showFinished: event.target.value
+    })
+    renderTodos(todos)
+})
+
+const checkUnfinished = document.querySelector('#show-unfinished')
+checkUnfinished.addEventListener('change', (event) => {
+    setFilters({
+        showUnfinished: event.target.value
+    })
+    renderTodos(todos)
 })
 
 const todos = [];
@@ -96,6 +119,7 @@ const setFilters = (updates) => {
     if(typeof updates.showUnfinished === 'boolean') {
         filters.showUnfinished = updates.showUnfinished
     }
+    console.log(filters);
 }
 
 const removeTodo = (title) => {
