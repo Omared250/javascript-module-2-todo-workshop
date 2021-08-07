@@ -85,6 +85,15 @@ const generateTodoDOM = (todoObj) => {
 }
 
 const renderTodos = (todos) => {
+    const filteredTodos = todos.filter((todo) => todo.title.toLowerCase().icludes(filters.searchTitle.toLocaleLowerCase()))
+    if(filters.showFinished && filters.showUnfinished) {
+        // do nothing
+    } else if(filters.showFinished) {
+        filteredTodos = filteredTodos.filter((todo) => todo.completed)
+    } else if(filters.showUnfinished) {
+        filteredTodos = filteredTodos.filter((todo) => !todo.completed)
+    }
+
     const todoList = document.querySelector('#todos')
     todoList.innerHTML = ''
 
