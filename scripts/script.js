@@ -85,7 +85,7 @@ const generateTodoDOM = (todoObj) => {
 }
 
 const renderTodos = (todos) => {
-    const filteredTodos = todos.filter((todo) => todo.title.toLowerCase().icludes(filters.searchTitle.toLocaleLowerCase()))
+    const filteredTodos = todos.filter((todo) => todo.title.toLowerCase().icludes(filters.searchTitle.toLowerCase()))
     if(filters.showFinished && filters.showUnfinished) {
         // do nothing
     } else if(filters.showFinished) {
